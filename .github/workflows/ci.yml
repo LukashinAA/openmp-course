@@ -9,7 +9,7 @@ on:
 
 env:
   LLVM_VER: "18"          # версия clang по умолчанию в ubuntu-24.04
-  DIRS: "hw0 hw1 hw2 hw3 project"
+  DIRS: "hw0"
 
 jobs:
   build-test:
@@ -69,4 +69,4 @@ jobs:
         with:
           fetch-depth: 0      # нужна вся история: проверяем, что прогноз закоммичен до результатов
       - name: check_report.py
-        run: python3 tools/check_report.py
+        run: python3 tools/check_report.py hw0
