@@ -1,0 +1,55 @@
+{
+  "created": "2026-11-23T21:47:57",
+  "hostname": "MacBook-Air-Artemij.local",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "processor": "arm",
+  "cpu_count_logical": 10,
+  "python": "3.14.0",
+  "cmd": "./build/particles_external 8 {mode}",
+  "threads": [
+    20
+  ],
+  "set": {
+    "mode": [
+      "external",
+      "full",
+      "tri"
+    ]
+  },
+  "env_sweep": {
+    "OMP_SCHEDULE": [
+      "static"
+    ],
+    "OMP_DYNAMIC": [
+      "FALSE"
+    ],
+    "OMP_PROC_BIND": [
+      "FALSE"
+    ]
+  },
+  "repeat": 5,
+  "warmup": 1,
+  "omp_env": {},
+  "argv": [
+    "../tools/bench.py",
+    "--cmd",
+    "./build/particles_external 8 {mode}",
+    "--threads",
+    "20",
+    "--set",
+    "mode=external,full,tri",
+    "--env",
+    "OMP_SCHEDULE=static",
+    "--repeat",
+    "5",
+    "--warmup",
+    "1",
+    "--shuffle",
+    "--env",
+    "OMP_DYNAMIC=FALSE",
+    "--env",
+    "OMP_PROC_BIND=FALSE",
+    "--out",
+    "results/review.csv"
+  ]
+}

@@ -1,0 +1,2 @@
+check external: отн. расхождение E 1.48e-13, F 2.30e-14
+RESULT 1.485e-13

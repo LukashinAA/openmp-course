@@ -9,7 +9,7 @@ on:
 
 env:
   LLVM_VER: "18"          # версия clang по умолчанию в ubuntu-24.04
-  DIRS: "hw0"
+  DIRS: "hw0 hw1 hw2 hw3 project"
 
 jobs:
   build-test:
@@ -33,6 +33,7 @@ jobs:
             [ -f "$d/Makefile" ] || continue
             echo "::group::$d ($CC)"
             make -C "$d" CC="$CC" WERROR=-Werror all test || { echo "::error::$d: сборка или тесты не прошли ($CC)"; status=1; }
+            if [ "$d" = "hw1" ]; then make -C "$d" CC="$CC" WERROR=-Werror review-test diagnostics-test || status=1; fi
             echo "::endgroup::"
           done
           exit $status
@@ -57,6 +58,7 @@ jobs:
             [ -f "$d/Makefile" ] || continue
             echo "::group::$d"
             make -C "$d" TSAN_CC=clang-${LLVM_VER} tsan || { echo "::error::$d: ThreadSanitizer нашёл гонку или программа упала"; status=1; }
+            if [ "$d" = "hw1" ]; then make -C "$d" TSAN_CC=clang-${LLVM_VER} review-tsan diagnostics-tsan || status=1; fi
             echo "::endgroup::"
           done
           exit $status
@@ -69,4 +71,4 @@ jobs:
         with:
           fetch-depth: 0      # нужна вся история: проверяем, что прогноз закоммичен до результатов
       - name: check_report.py
-        run: python3 tools/check_report.py hw0
+        run: python3 tools/check_report.py

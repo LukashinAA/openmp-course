@@ -12,4 +12,5 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+/hw1/basins.bmp
 # results/*.csv, results/*.meta.json и plots/*.png НЕ игнорируются: их нужно коммитить

@@ -35,7 +35,12 @@ def num(s):
 
 def sort_key(v):
     n = num(v)
-    return (0, n, "") if isinstance(n, (int, float)) else (1, 0, str(v))
+    if isinstance(n, (int, float)):
+        return (0, n, -1)
+    prefix, separator, chunk = str(v).rpartition(",")
+    if separator and chunk.isdigit():
+        return (1, prefix, int(chunk))
+    return (1, str(v), -1)
 
 
 def load(path, filters):

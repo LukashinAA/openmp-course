@@ -1,0 +1,59 @@
+{
+  "created": "2026-11-23T21:42:56",
+  "hostname": "MacBook-Air-Artemij.local",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "processor": "arm",
+  "cpu_count_logical": 10,
+  "python": "3.14.0",
+  "cmd": "./build/newton 8 {nx} {nx} par",
+  "threads": [
+    20
+  ],
+  "set": {
+    "nx": [
+      "2000"
+    ]
+  },
+  "env_sweep": {
+    "OMP_SCHEDULE": [
+      "static",
+      "static,1",
+      "static,16",
+      "dynamic,1",
+      "dynamic,16",
+      "dynamic,256",
+      "guided"
+    ],
+    "OMP_DYNAMIC": [
+      "FALSE"
+    ],
+    "OMP_PROC_BIND": [
+      "FALSE"
+    ]
+  },
+  "repeat": 5,
+  "warmup": 1,
+  "omp_env": {},
+  "argv": [
+    "../tools/bench.py",
+    "--cmd",
+    "./build/newton 8 {nx} {nx} par",
+    "--threads",
+    "20",
+    "--set",
+    "nx=2000",
+    "--env",
+    "OMP_SCHEDULE=static;static,1;static,16;dynamic,1;dynamic,16;dynamic,256;guided",
+    "--env",
+    "OMP_DYNAMIC=FALSE",
+    "--env",
+    "OMP_PROC_BIND=FALSE",
+    "--repeat",
+    "5",
+    "--warmup",
+    "1",
+    "--shuffle",
+    "--out",
+    "results/newton_sched.csv"
+  ]
+}
